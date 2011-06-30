@@ -5,6 +5,6 @@ class Article < ActiveRecord::Base
   validates :body, :presence => true
 
   def multiline_body
-    self.body.gsub(/\r\n|\n/, '<br />')
+    ERB::Util.h(self.body).gsub(/\r\n|\n/, '<br />').html_safe
   end
 end
